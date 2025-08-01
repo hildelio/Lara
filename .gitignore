@@ -57,3 +57,10 @@ build/
 # Backup files
 *.bak
 *.backup
+
+# GitHub Pages specific
+_site/
+.jekyll-cache/
+
+# Local development
+.vscode/settings.json
