@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lara Rocha - Psicóloga CRP 03/16015</title>
+    <meta name="description" content="Psicóloga Lara Rocha - Atendimento presencial e online em Salvador, BA. Convênios aceitos: Bradesco Saúde, Saúde CAIXA, Mediservice, Fachesf.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Lora:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- INÍCIO DO CSS --- */
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: #3D403A;
+            background-color: #F8F6F2;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-family: 'Lora', serif;
+            color: #3D403A;
+        }
+
+        .logo h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem; 
+            color: #5A6349;
+            font-weight: 500;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: transparent;
+            z-index: 1000;
+            padding: 1.5rem 0;
+            transition: background-color 0.4s ease, box-shadow 0.4s ease, padding 0.4s ease;
+        }
+        
+        .header.scrolled {
+            background-color: rgba(248, 246, 242, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 1rem 0;
+            box-shadow: 0 4px 20px rgba(90, 99, 73, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #3D403A;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-links a:hover {
+            color: #5A6349;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #5A6349;
+            transition: width 0.4s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: #5A6349;
+            color: #F8F6F2;
+            padding: 0.75rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid #5A6349;
+            box-shadow: 0 4px 15px rgba(90, 99, 73, 0.2);
+        }
+
+        .cta-button:hover {
+            background: #F8F6F2;
+            color: #5A6349;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(90, 99, 73, 0.25);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            z-index: 1001;
+        }
+
+        .mobile-menu-toggle span {
+            width: 28px;
+            height: 3px;
+            background: #5A6349;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            border-radius: 2px;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(248, 246, 242, 0.98);
+            backdrop-filter: blur(15px);
+            z-index: 999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+        
+        .mobile-menu.active {
+            display: flex;
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            text-align: center;
+        }
+
+        .mobile-nav-links li {
+            margin: 2rem 0;
+        }
+
+        .mobile-nav-links a {
+            text-decoration: none;
+            color: #3D403A;
+            font-family: 'Lora', serif;
+            font-size: 2rem;
+            font-weight: 500;
+        }
+
+        .mobile-cta {
+            background: #5A6349;
+            color: #F8F6F2 !important;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            margin-top: 2rem;
+            font-size: 1.2rem !important;
+        }
+
+        /* --- MELHORIA GERAL: Hero Section com Carrossel --- */
+        .hero {
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 2s ease-in-out, transform 8s ease-out;
+            transform: scale(1.1);
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 3rem 4rem;
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px 0 rgba(90, 99, 73, 0.2);
+            animation: contentFadeIn 1.5s 0.5s ease forwards;
+        }
+
+        @keyframes contentFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            font-weight: 500;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: #3D403A;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: #5A6349;
+            margin-bottom: 2.5rem;
+            font-weight: 400;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            background: #5A6349;
+            color: #F8F6F2;
+            padding: 1rem 2.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: 2px solid #5A6349;
+            box-shadow: 0 4px 15px rgba(90, 99, 73, 0.2);
+        }
+
+        .hero-cta:hover {
+            background: transparent;
+            color: #5A6349;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(90, 99, 73, 0.25);
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            z-index: 3;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: contentFadeIn 1.5s 1.5s ease forwards;
+        }
+        
+        .scroll-indicator .mouse {
+            width: 30px;
+            height: 50px;
+            border: 2px solid #3D403A;
+            border-radius: 60px;
+            position: relative;
+        }
+        
+        .scroll-indicator .mouse::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #3D403A;
+            border-radius: 50%;
+            opacity: 1;
+            animation: wheel 2s infinite;
+        }
+        
+        @keyframes wheel {
+            to {
+                opacity: 0;
+                top: 30px;
+            }
+        }
+
+        /* Section Styles */
+        section {
+            padding: 100px 0;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            position: relative;
+        }
+        
+        #hero { 
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        #sobre { background-color: #fff; }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            color: #5A6349;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: #3D403A;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            align-items: center;
+            gap: 4rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .about-photo {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(90, 99, 73, 0.15);
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            text-align: justify;
+            line-height: 1.8;
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(90, 99, 73, 0.1);
+            box-shadow: 0 10px 30px rgba(90, 99, 73, 0.05);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 40px rgba(90, 99, 73, 0.12);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: #F8F6F2;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            border: 2px solid rgba(90, 99, 73, 0.1);
+        }
+
+        .service-icon i {
+            font-size: 2rem;
+            color: #5A6349;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #5A6349;
+        }
+
+        /* Health Plans Section */
+        .health-plans {
+            background: #fff;
+        }
+
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .plan-logo-standard {
+            border: 1px solid rgba(90, 99, 73, 0.2);
+            background-color: #fff;
+            padding: 1.5rem;
+            border-radius: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 90px;
+        }
+
+        .plan-logo-standard:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(90, 99, 73, 0.1);
+        }
+
+        .plan-logo-standard svg {
+            height: auto;
+            max-height: 40px;
+            width: 90%;
+            fill: #3D403A;
+        }
+        
+        /* Seção de Agendamento */
+        #agendamento {
+            background-color: #F8F6F2;
+            padding: 100px 0;
+        }
+        
+        .scheduling-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            background-color: #fff;
+            padding: 4rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(90, 99, 73, 0.15);
+        }
+        
+        .scheduling-content .section-title {
+            margin-bottom: 1.5rem;
+        }
+        
+        .scheduling-content .section-subtitle {
+            margin-bottom: 3rem;
+        }
+        
+        .scheduling-options {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+        }
+        
+        .scheduling-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: #5A6349;
+            color: #F8F6F2;
+            padding: 1rem 2.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: 2px solid #5A6349;
+            box-shadow: 0 4px 15px rgba(90, 99, 73, 0.2);
+        }
+        
+        .scheduling-button.primary {
+            background: #5A6349;
+            color: #F8F6F2;
+        }
+        
+        .scheduling-button.secondary {
+            background: transparent;
+            color: #5A6349;
+        }
+        
+        .scheduling-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(90, 99, 73, 0.2);
+        }
+        
+        .calendly-note {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: #3D403A;
+            opacity: 0.8;
+        }
+
+        /* Contact Section */
+        #contato { background-color: #fff; }
+        .contact-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            background: #F8F6F2;
+            padding: 2rem;
+            border-radius: 15px;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(90, 99, 73, 0.1);
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .contact-icon i {
+            font-size: 1.5rem;
+            color: #5A6349;
+        }
+
+        .contact-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #5A6349;
+        }
+
+        .contact-info a, .contact-info p {
+            color: #3D403A;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: #5A6349;
+        }
+
+        /* Footer */
+        .footer {
+            background: #3D403A;
+            color: #F8F6F2;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .footer p {
+            margin-bottom: 0.5rem;
+            opacity: 0.8;
+        }
+        .footer strong {
+            opacity: 1;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+            .about-text p {
+                text-align: center;
+            }
+            .about-photo {
+                max-width: 350px;
+                margin: 0 auto 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+            }
+            
+            .mobile-menu-toggle {
+                display: flex;
+            }
+            
+            .mobile-menu-toggle.active span:nth-child(1) {
+                transform: rotate(45deg) translate(6px, 6px);
+            }
+            
+            .mobile-menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .mobile-menu-toggle.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -7px);
+            }
+            
+            .logo h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            .hero-content {
+                padding: 2rem;
+                max-width: 90%;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .plans-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+            
+            section {
+                padding: 80px 0;
+            }
+            
+            .scheduling-options {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .service-card, .contact-item, .scheduling-content {
+                padding: 2rem 1.5rem;
+            }
+            
+            .plans-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>Lara Rocha</h1>
+                </div>
+                <nav class="nav">
+                    <ul class="nav-links">
+                        <li><a href="#sobre">Sobre</a></li>
+                        <li><a href="#servicos">Serviços</a></li>
+                        <li><a href="#agendamento">Agendar</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                    </ul>
+                    <a href="#agendamento" class="cta-button">Agendar Consulta</a>
+                </nav>
+                <div class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <ul class="mobile-nav-links">
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#servicos">Serviços</a></li>
+            <li><a href="#agendamento">Agendar</a></li>
+            <li><a href="#contato">Contato</a></li>
+            <li><a href="#agendamento" class="mobile-cta">Agendar Consulta</a></li>
+        </ul>
+    </div>
+
+    <main>
+        <!-- Hero Section com Carrossel -->
+        <section id="hero" class="hero">
+            <div class="carousel-container">
+                <div class="carousel-slide" style="background-image: url('https://images.pexels.com/photos/3998365/pexels-photo-3998365.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');"></div>
+                <div class="carousel-slide" style="background-image: url('https://images.pexels.com/photos/1036622/pexels-photo-1036622.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');"></div>
+                <div class="carousel-slide" style="background-image: url('https://images.pexels.com/photos/3760067/pexels-photo-3760067.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');"></div>
+            </div>
+            <div class="hero-content">
+                <h1 class="hero-title">Cuidando da sua saúde mental, promovendo o seu bem-estar.</h1>
+                <p class="hero-subtitle">Psicoterapia para adultos, online e presencial em Salvador, BA.</p>
+                <a href="#agendamento" class="hero-cta">Agendar uma Consulta</a>
+            </div>
+            <div class="scroll-indicator">
+                <div class="mouse"></div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="sobre" class="about">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Sobre Mim</h2>
+                </div>
+                <div class="about-content">
+                    <img src="https://images.unsplash.com/photo-1580820267682-426da823b514?q=80&w=1974&auto=format&fit=crop" alt="Foto da psicóloga Lara Rocha" class="about-photo" onerror="this.onerror=null;this.src='https://placehold.co/400x500/EAE6E1/3D403A?text=Lara+Rocha';">
+                    <div class="about-text">
+                        <p>Olá, sou <strong>Lara Rocha, Psicóloga CRP - 03/16015</strong>, e dedico minha carreira ao cuidado e promoção da saúde mental. Acredito que cada pessoa possui recursos únicos para superar desafios e alcançar uma vida mais plena e significativa.</p>
+                        <p>Com uma abordagem humanizada e acolhedora, ofereço um espaço seguro onde você pode explorar suas emoções, pensamentos e comportamentos. Meu trabalho é baseado em evidências científicas e na construção de uma relação terapêutica sólida e confiável.</p>
+                        <p>Atendo tanto de forma presencial, em meu consultório em Salvador, quanto online, proporcionando flexibilidade e comodidade para que você possa iniciar ou dar continuidade ao seu processo terapêutico da melhor forma possível.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="servicos" class="services">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Como Posso Ajudar</h2>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-user"></i></div>
+                        <h3>Psicoterapia Individual</h3>
+                        <p>Atendimento personalizado focado em suas necessidades específicas, promovendo autoconhecimento e desenvolvimento de estratégias para lidar com desafios da vida.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-laptop"></i></div>
+                        <h3>Atendimento Online</h3>
+                        <p>Sessões terapêuticas no conforto da sua casa, com toda a qualidade e eficácia do atendimento presencial, oferecendo flexibilidade de horários e local.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-home"></i></div>
+                        <h3>Atendimento Presencial</h3>
+                        <p>Consultório acolhedor e reservado em Salvador, BA, criando um ambiente seguro e confortável para seu processo terapêutico.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NOVA SEÇÃO DE AGENDAMENTO -->
+        <section id="agendamento" class="agendamento">
+            <div class="container">
+                <div class="scheduling-content">
+                    <h2 class="section-title">Agende sua Consulta</h2>
+                    <p class="section-subtitle">Escolha a forma mais conveniente para você dar o primeiro passo na sua jornada de autoconhecimento e cuidado.</p>
+                    <div class="scheduling-options">
+                        <a href="https://calendly.com/seu-usuario" target="_blank" rel="noopener noreferrer" class="scheduling-button primary">
+                            <i class="fas fa-calendar-alt"></i> Ver Horários Disponíveis
+                        </a>
+                        <a href="https://wa.me/5571992781671?text=Olá,%20Dra.%20Lara.%20Encontrei%20seu%20site%20e%20gostaria%20de%20mais%20informações%20sobre%20o%20agendamento%20de%20uma%20consulta." target="_blank" rel="noopener noreferrer" class="scheduling-button secondary">
+                            <i class="fab fa-whatsapp"></i> Falar no WhatsApp
+                        </a>
+                    </div>
+                    <p class="calendly-note">O agendamento online é feito através da plataforma Calendly, de forma segura e prática.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Health Plans Section -->
+        <section id="convenios" class="health-plans">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Convênios Aceitos</h2>
+                </div>
+                <div class="plans-grid">
+                    <div class="plan-logo-standard">
+                        <svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg"><text x="100" y="30" text-anchor="middle" font-family="'Lora', serif" font-size="20" font-weight="500" fill="#3D403A">Bradesco Saúde</text></svg>
+                    </div>
+                    <div class="plan-logo-standard">
+                        <svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg"><text x="100" y="30" text-anchor="middle" font-family="'Lora', serif" font-size="20" font-weight="500" fill="#3D403A">Saúde CAIXA</text></svg>
+                    </div>
+                    <div class="plan-logo-standard">
+                        <svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg"><text x="100" y="30" text-anchor="middle" font-family="'Lora', serif" font-size="20" font-weight="500" fill="#3D403A">Mediservice</text></svg>
+                    </div>
+                    <div class="plan-logo-standard">
+                        <svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg"><text x="100" y="30" text-anchor="middle" font-family="'Lora', serif" font-size="20" font-weight="500" fill="#3D403A">Fachesf</text></svg>
+                    </div>
+                    <div class="plan-logo-standard">
+                         <svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg"><text x="100" y="30" text-anchor="middle" font-family="'Lora', serif" font-size="20" font-weight="500" fill="#3D403A">Ap-Social</text></svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contato" class="contact">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Outras Formas de Contato</h2>
+                </div>
+                <div class="contact-methods">
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                        <div class="contact-info">
+                            <h3>Telefone</h3>
+                            <a href="tel:+5571992781671">(71) 99278-1671</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                        <div class="contact-info">
+                            <h3>E-mail</h3>
+                            <a href="mailto:lararochap@hotmail.com">lararochap@hotmail.com</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="contact-info">
+                            <h3>Endereço</h3>
+                            <p>Atendimento presencial em Salvador, BA (Endereço sob consulta)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p><strong>Lara Rocha - Psicóloga CRP 03/16015</strong></p>
+            <p>© 2025 Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- INÍCIO DO JAVASCRIPT ---
+
+        // Usar uma IIFE (Immediately Invoked Function Expression) para evitar poluir o escopo global
+        (function() {
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const mobileNavLinks = document.querySelectorAll('.mobile-menu a');
+            const header = document.querySelector('.header');
+
+            // Toggle mobile menu
+            if (mobileMenuToggle && mobileMenu) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    mobileMenuToggle.classList.toggle('active');
+                    mobileMenu.classList.toggle('active');
+                });
+            }
+
+            // Close mobile menu when link is clicked
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    if (mobileMenuToggle && mobileMenu) {
+                        mobileMenuToggle.classList.remove('active');
+                        mobileMenu.classList.remove('active');
+                    }
+                });
+            });
+
+            // Header Background on Scroll
+            if (header) {
+                window.addEventListener('scroll', function() {
+                    if (window.scrollY > 50) {
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+                });
+            }
+
+            // Smooth Scrolling for all anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        const headerHeight = header ? header.offsetHeight : 0;
+                        const targetPosition = targetElement.offsetTop - headerHeight - 20;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Scroll Animation Observer for sections
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            document.querySelectorAll('section:not(#hero)').forEach(section => {
+                observer.observe(section);
+            });
+            
+            // Hero Carousel Logic
+            const slides = document.querySelectorAll('.carousel-slide');
+            if (slides.length > 0) {
+                let currentSlide = 0;
+                const slideInterval = 6000;
+                
+                slides[0].classList.add('active');
+
+                function nextSlide() {
+                    slides[currentSlide].classList.remove('active');
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    slides[currentSlide].classList.add('active');
+                }
+
+                setInterval(nextSlide, slideInterval);
+            }
+        })();
+    </script>
+</body>
+</html>
